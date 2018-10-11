@@ -28,25 +28,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startAgain(_ sender: UIButton) {
-        playingArea.cardViewsInPlay.removeAll()
         game = Game()
         updateViewFromModel()
     }
     
     var game = Game()
     
+    var cardViews = [CardView]()
+    
     func updateViewFromModel() {
-        var newCardViews = [CardView]()
-        if playingArea.cardViewsInPlay.count < game.loadedCards.count {
-            for index in playingArea.cardViewsInPlay.count...(game.loadedCards.count - 1) {
-                newCardViews.append(createCardView(from: game.loadedCards[index]))
-            }
-            playingArea.addCardViewsInPlay(newCardViews)
-        }
-        
-        for index in playingArea.cardViewsInPlay.indices {
-            let cardView = playingArea.cardViewsInPlay[index]
+        cardViews = []
+        for index in game.loadedCards.indices {
             let card = game.loadedCards[index]
+            let cardView = createCardView(from: card)
+            
             if game.matchedCards.contains(card) {
                 cardView.isMatched = true
             }
@@ -54,15 +49,26 @@ class ViewController: UIViewController {
                 cardView.isSelected = true
             }
             else {
-                if cardView.isMatched { cardView.isMatched = false }
-                if cardView.isSelected { cardView.isSelected = false }
+                cardView.isMatched = false
+                cardView.isSelected = false
             }
+            cardViews += [cardView]
         }
-        
+        playingArea.cardViewsInPlay = cardViews
         setTitle?.textColor = !game.matchedCards.isEmpty ? UIColor.blue : UIColor.white
         scoreLabel?.text = "SCORE: \(game.score)"
     }
     
+    @objc func handleCardTap(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == .ended {
+            if let cardView = recognizer.view as? CardView {
+                if let index = cardViews.index(of: cardView) {
+                    game.chooseCard(at: index)
+                }
+                updateViewFromModel()
+            }
+        }
+    }
     
     func createCardView(from card: Card) -> CardView {
         let cardView = CardView()
@@ -74,18 +80,6 @@ class ViewController: UIViewController {
         cardView.addGestureRecognizer(tap)
         return cardView
     }
-    
-    @objc func handleCardTap(recognizer: UITapGestureRecognizer) {
-        if recognizer.state == .ended {
-            if let cardView = recognizer.view as? CardView {
-                if let index = playingArea.cardViewsInPlay.index(of: cardView) {
-                    game.chooseCard(at: index)
-                }
-                updateViewFromModel()
-            }
-        }
-    }
-    
     
 }
 
