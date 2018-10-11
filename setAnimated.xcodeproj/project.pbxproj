@@ -66,16 +66,16 @@
 		E3FB8937216F20630071644E /* setAnimated */ = {
 			isa = PBXGroup;
 			children = (
-				E3FB8938216F20630071644E /* AppDelegate.swift */,
-				E3FB893A216F20630071644E /* ViewController.swift */,
-				E3FB894C216F213B0071644E /* Card.swift */,
-				E3FB894E216F213B0071644E /* CardsGridView.swift */,
-				E3FB894B216F213B0071644E /* CardView.swift */,
-				E3FB894F216F213B0071644E /* Game.swift */,
-				E3FB894D216F213B0071644E /* Grid.swift */,
 				E3FB894A216F213B0071644E /* Illustration.swift */,
+				E3FB894B216F213B0071644E /* CardView.swift */,
+				E3FB894E216F213B0071644E /* CardsGridView.swift */,
 				E3FB893C216F20630071644E /* Main.storyboard */,
+				E3FB893A216F20630071644E /* ViewController.swift */,
+				E3FB894F216F213B0071644E /* Game.swift */,
+				E3FB894C216F213B0071644E /* Card.swift */,
+				E3FB894D216F213B0071644E /* Grid.swift */,
 				E3FB893F216F20660071644E /* Assets.xcassets */,
+				E3FB8938216F20630071644E /* AppDelegate.swift */,
 				E3FB8941216F20660071644E /* LaunchScreen.storyboard */,
 				E3FB8944216F20660071644E /* Info.plist */,
 			);

@@ -10,36 +10,57 @@ import UIKit
 
 class CardsGridView: UIView {
     
-    var cardViewsInPlay = [CardView]() { didSet { setNeedsLayout() } }
+    var cardViewsInPlay: [CardView] = [CardView]() { didSet { setNeedsLayout() } }
     
-    var cardsGrid = Grid(layout: .aspectRatio(5/8))
+    var grid = Grid(layout: .aspectRatio(5/8))
     
-    func configureCardSubViews() {
-        for index in cardViewsInPlay.indices {
-            cardViewsInPlay[index].frame = cardsGrid[index]!.zoom(by: 0.9)
+    func addCardViews(number: Int) {
+        var newCardViews = [CardView]()
+        for _ in 1...number {
+            let cardView = CardView()
+            cardView.alpha = 0
+            addSubview(cardView)
+            newCardViews.append(cardView)
         }
+        cardViewsInPlay += newCardViews
     }
     
-    func createCardSubviews() {
-        for subview in subviews {
-            subview.removeFromSuperview()
+    func removeCardViews(number: Int) {
+        for _ in 1...number {
+            subviews.last?.removeFromSuperview()
         }
-        for cardView in cardViewsInPlay {
-            addSubview(cardView)
-        }
+        cardViewsInPlay.removeLast(number)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        cardsGrid.frame = bounds
-        createCardSubviews()
-        cardsGrid.cellCount = subviews.count
+        grid.frame = bounds
+        grid.cellCount = cardViewsInPlay.count
         configureCardSubViews()
+    }
+    
+    func configureCardSubViews() {
+        for index in cardViewsInPlay.indices {
+            cardViewsInPlay[index].frame = grid[index]!.zoom(by: 0.9)
+        }
+    }
+    
+    func clear() {
+        cardViewsInPlay.removeAll()
+        removeAllSubViews()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setNeedsDisplay()
         setNeedsLayout()
+    }
+}
+
+extension UIView {
+    func removeAllSubViews() {
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
     }
 }
 
@@ -50,3 +71,10 @@ extension CGRect {
         return insetBy(dx: (width - newWidth) / 2, dy: (height - newHeight) / 2)
     }
 }
+
+//    func createCardSubviews() {
+//        removeAllSubViews()
+//        for cardView in cardViewsInPlay {
+//            addSubview(cardView)
+//        }
+//    }

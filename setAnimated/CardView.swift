@@ -24,27 +24,27 @@ class CardView: UIView {
     
     var isMatched: Bool = false { didSet { setNeedsDisplay(); setNeedsLayout() } }
     
-    func createIllustrationSubViews() -> [Illustration] {
-        var subViewsArray = [Illustration]()
+    var illustrationSubViews = [Illustration]()
+    
+    func createIllustrationSubViews() {
+        removeAllSubViews()
+        illustrationSubViews.removeAll()
         for times in 0...number {
-            guard times < 3 else { return [] }
+            guard times < 3 else { break }
             let illustration = Illustration()
             illustration.shapeID = shape
             illustration.colorID = color
             illustration.shadeID = shade
             addSubview(illustration)
-            subViewsArray.append(illustration)
+            illustrationSubViews.append(illustration)
         }
-        return subViewsArray
     }
     
-    func configureIllustrationSubView(_ illustration: Illustration) {
-        illustration.isOpaque = false
-        illustration.backgroundColor = UIColor.clear
-        illustration.frame.size = CGSize(width: illustrationWidth, height: illustrationHeight)
+    func configureIllustrationSubViews(_ illustrationSubView: Illustration) {
+        illustrationSubView.isOpaque = false
+        illustrationSubView.backgroundColor = UIColor.clear
+        illustrationSubView.frame.size = CGSize(width: illustrationWidth, height: illustrationHeight)
     }
-    
-    lazy var illustrationSubViewsArray = createIllustrationSubViews()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -53,9 +53,10 @@ class CardView: UIView {
         }
         else {
             backgroundColor = UIColor.white
+            createIllustrationSubViews()
             if var offset = illustrationOffsetFromTop {
-                for illustrationSubView in illustrationSubViewsArray {
-                    configureIllustrationSubView(illustrationSubView)
+                for illustrationSubView in illustrationSubViews {
+                    configureIllustrationSubViews(illustrationSubView)
                     illustrationSubView.frame.origin = bounds.origin.offsetBy(dx: illustrationOffsetFromLeft, dy: offset)
                     offset += illustrationHeight + spaceBetweenIllustrations
                 }

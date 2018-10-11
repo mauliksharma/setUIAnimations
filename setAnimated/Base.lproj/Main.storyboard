@@ -12,12 +12,12 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="setGraphics" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="setAnimated" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="wpF-xg-Y3K" customClass="CardsGridView" customModule="setGraphics" customModuleProvider="target">
+                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="wpF-xg-Y3K" customClass="CardsGridView" customModule="setAnimated" customModuleProvider="target">
                                 <rect key="frame" x="16" y="30" width="343" height="537"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -80,8 +80,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="cardsGrid" destination="wpF-xg-Y3K" id="Sgu-O7-qN6"/>
                         <outlet property="dealButton" destination="C1G-Mx-4Ov" id="9EA-3m-X22"/>
-                        <outlet property="playingArea" destination="wpF-xg-Y3K" id="Sgu-O7-qN6"/>
                         <outlet property="scoreLabel" destination="AS9-l1-gM8" id="L9g-jZ-1ee"/>
                         <outlet property="setTitle" destination="lgd-qt-CDL" id="HPg-bw-y25"/>
                     </connections>
