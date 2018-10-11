@@ -10,19 +10,19 @@ import UIKit
 
 class CardView: UIView {
     
-    var shape: Int = 0 { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var shape: Int = 0 { didSet { setNeedsLayout() } }
     
-    var number: Int = 0 { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var number: Int = 0 { didSet { setNeedsLayout() } }
     
-    var color: Int = 0 { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var color: Int = 0 { didSet { setNeedsLayout() } }
     
-    var shade: Int = 0 { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var shade: Int = 0 { didSet { setNeedsLayout() } }
     
-    var isFaceUp: Bool = true { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var isFaceUp: Bool = true { didSet { setNeedsLayout() } }
     
-    var isSelected: Bool = false { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var isSelected: Bool = false { didSet { setNeedsLayout() } }
     
-    var isMatched: Bool = false { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var isMatched: Bool = false { didSet { setNeedsLayout() } }
     
     var illustrationSubViews = [Illustration]()
     

@@ -72,9 +72,3 @@ extension CGRect {
     }
 }
 
-//    func createCardSubviews() {
-//        removeAllSubViews()
-//        for cardView in cardViewsInPlay {
-//            addSubview(cardView)
-//        }
-//    }
