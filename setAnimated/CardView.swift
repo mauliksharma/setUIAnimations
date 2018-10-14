@@ -18,7 +18,7 @@ class CardView: UIView {
     
     var shade: Int = 0 { didSet { setNeedsLayout() } }
     
-    var isFaceUp: Bool = true { didSet { setNeedsLayout() } }
+    var isFaceUp: Bool = false { didSet { setNeedsLayout() } }
     
     var isSelected: Bool = false { didSet { setNeedsLayout() } }
     
@@ -49,7 +49,7 @@ class CardView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         if !isFaceUp {
-            backgroundColor = UIColor.darkGray
+            backgroundColor = #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)
         }
         else {
             backgroundColor = UIColor.white

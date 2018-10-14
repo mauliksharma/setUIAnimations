@@ -10,9 +10,14 @@ import UIKit
 
 class CardsGridView: UIView {
     
-    var cardViewsInPlay: [CardView] = [CardView]() { didSet { setNeedsLayout() } }
+    var cardViewsInPlay: [CardView] = [CardView]()
+    { didSet { setNeedsDisplay(); layoutIfNeeded() } }
     
     var grid = Grid(layout: .aspectRatio(5/8))
+    
+    var deckExhausted = false
+    
+    var deckFrame = CGRect()
     
     func addCardViews(number: Int) {
         var newCardViews = [CardView]()
@@ -32,16 +37,27 @@ class CardsGridView: UIView {
         cardViewsInPlay.removeLast(number)
     }
     
+//    override func draw(_ rect: CGRect) {
+//    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         grid.frame = bounds
         grid.cellCount = cardViewsInPlay.count
         configureCardSubViews()
+        deckFrame = CGRect(x: bounds.minX, y: bounds.maxY + 10, width: 50, height: 80)
     }
     
     func configureCardSubViews() {
         for index in cardViewsInPlay.indices {
-            cardViewsInPlay[index].frame = grid[index]!.zoom(by: 0.9)
+            let cardView = cardViewsInPlay[index]
+            guard cardView.alpha == 1 else { cardView.frame = grid[index]!.zoom(by: 0.9); return }
+            UIViewPropertyAnimator.runningPropertyAnimator(
+                withDuration: 0.3,
+                delay: 0,
+                options: [.curveEaseInOut],
+                animations: { cardView.frame = self.grid[index]!.zoom(by: 0.9) },
+                completion: nil)
         }
     }
     
@@ -51,7 +67,7 @@ class CardsGridView: UIView {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        setNeedsDisplay()
+        configureCardSubViews()
         setNeedsLayout()
     }
 }

@@ -13,75 +13,84 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="setAnimated" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="redraw" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="wpF-xg-Y3K" customClass="CardsGridView" customModule="setAnimated" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpF-xg-Y3K" customClass="CardsGridView" customModule="setAnimated" customModuleProvider="target">
                                 <rect key="frame" x="16" y="30" width="343" height="537"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="7iA-CG-Ovh">
-                                <rect key="frame" x="16" y="577" width="343" height="80"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1G-Mx-4Ov">
+                                <rect key="frame" x="16" y="577" width="50" height="80"/>
+                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="C1G-Mx-4Ov" secondAttribute="height" multiplier="5:8" id="02D-KO-ieh"/>
+                                    <constraint firstAttribute="height" constant="80" id="Bri-tD-hay"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="DEAL">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="dealMoreCards:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GSp-I0-f6T"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSI-oR-JUk">
+                                <rect key="frame" x="309" y="577" width="50" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="NSI-oR-JUk" secondAttribute="height" multiplier="5:8" id="Yvz-gp-hgD"/>
+                                    <constraint firstAttribute="height" constant="80" id="bOz-4i-YRt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="NEW">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="startAgain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CiG-88-UuP"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="uRX-XR-PLd">
+                                <rect key="frame" x="144.5" y="577" width="86" height="80"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1G-Mx-4Ov">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="80"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="C1G-Mx-4Ov" secondAttribute="height" multiplier="5:8" id="02D-KO-ieh"/>
-                                        </constraints>
-                                        <state key="normal" title="DEAL"/>
-                                        <connections>
-                                            <action selector="dealMoreCards:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GSp-I0-f6T"/>
-                                        </connections>
-                                    </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="rtW-IX-GnS">
-                                        <rect key="frame" x="91" y="0.0" width="161" height="80"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S E T !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgd-qt-CDL">
-                                                <rect key="frame" x="0.0" y="0.0" width="161" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORE: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AS9-l1-gM8">
-                                                <rect key="frame" x="0.0" y="50" width="161" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <color key="textColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSI-oR-JUk">
-                                        <rect key="frame" x="293" y="0.0" width="50" height="80"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="NSI-oR-JUk" secondAttribute="height" multiplier="5:8" id="Yvz-gp-hgD"/>
-                                        </constraints>
-                                        <state key="normal" title="NEW"/>
-                                        <connections>
-                                            <action selector="startAgain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CiG-88-UuP"/>
-                                        </connections>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S E T !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgd-qt-CDL">
+                                        <rect key="frame" x="0.0" y="0.0" width="86" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORE: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AS9-l1-gM8">
+                                        <rect key="frame" x="0.0" y="50" width="86" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="UDE-Lt-ypI"/>
+                                    <constraint firstAttribute="height" constant="80" id="Fmh-IC-tVk"/>
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.81077703003624157" green="0.77640010631378975" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7iA-CG-Ovh" secondAttribute="trailing" constant="16" id="8J5-M2-aQ5"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wpF-xg-Y3K" secondAttribute="trailing" constant="16" id="BB0-qg-e4S"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7iA-CG-Ovh" secondAttribute="bottom" constant="10" id="Vy1-L7-LcJ"/>
-                            <constraint firstItem="7iA-CG-Ovh" firstAttribute="top" secondItem="wpF-xg-Y3K" secondAttribute="bottom" constant="10" id="lCq-Hz-osr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NSI-oR-JUk" secondAttribute="trailing" constant="16" id="1PI-a4-Y9c"/>
+                            <constraint firstItem="C1G-Mx-4Ov" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="3p2-TU-m9R"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wpF-xg-Y3K" secondAttribute="trailing" constant="16" id="3sh-aB-Cjx"/>
+                            <constraint firstItem="uRX-XR-PLd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="C1G-Mx-4Ov" secondAttribute="trailing" constant="10" id="5Bf-uo-Swk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="NSI-oR-JUk" secondAttribute="bottom" constant="10" id="HJV-QT-z11"/>
+                            <constraint firstItem="uRX-XR-PLd" firstAttribute="top" secondItem="wpF-xg-Y3K" secondAttribute="bottom" constant="10" id="amC-57-wEJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="C1G-Mx-4Ov" secondAttribute="bottom" constant="10" id="kcQ-Nn-Avu"/>
                             <constraint firstItem="wpF-xg-Y3K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="lMq-Jg-JCc"/>
-                            <constraint firstItem="7iA-CG-Ovh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="sXT-Sl-HnX"/>
+                            <constraint firstItem="uRX-XR-PLd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pxe-ek-ox1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="uRX-XR-PLd" secondAttribute="bottom" constant="10" id="rdh-G6-eAF"/>
+                            <constraint firstItem="NSI-oR-JUk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uRX-XR-PLd" secondAttribute="trailing" constant="10" id="thW-eW-REe"/>
                             <constraint firstItem="wpF-xg-Y3K" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="xzQ-8n-VPQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="cardsGrid" destination="wpF-xg-Y3K" id="Sgu-O7-qN6"/>
-                        <outlet property="dealButton" destination="C1G-Mx-4Ov" id="9EA-3m-X22"/>
+                        <outlet property="dealButton" destination="C1G-Mx-4Ov" id="cle-ZU-Eb1"/>
                         <outlet property="scoreLabel" destination="AS9-l1-gM8" id="L9g-jZ-1ee"/>
                         <outlet property="setTitle" destination="lgd-qt-CDL" id="HPg-bw-y25"/>
                     </connections>
