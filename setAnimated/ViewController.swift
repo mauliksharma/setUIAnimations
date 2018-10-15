@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     var game = Game()
     
-    @IBOutlet weak var setTitle: UILabel!
+    @IBOutlet weak var setLabel: UILabel!
     
     @IBOutlet weak var dealButton: UIButton!
     
@@ -25,10 +25,12 @@ class ViewController: UIViewController {
         updateViewFromModel()
     }
     
-    @IBAction func startAgain(_ sender: UIButton) {
+    @IBAction func startNewGame(_ sender: UIButton) {
         game = Game()
         cardsGrid.clear()
         updateViewFromModel()
+        dealButton.backgroundColor = #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)
+        setLabel.backgroundColor = UIColor.clear
     }
     
     override func viewDidLoad() {
@@ -40,12 +42,11 @@ class ViewController: UIViewController {
         let viewsCount = cardsGrid.cardViewsInPlay.count
         let cardsCount = game.loadedCards.count
         
-        
         if viewsCount < cardsCount {
             cardsGrid.addCardViews(number: cardsCount - viewsCount)
         }
         if viewsCount > cardsCount {
-            cardsGrid.removeCardViews(number: viewsCount - cardsCount)
+            cardsGrid.removeMatchedCardViews()
         }
         
         for index in game.loadedCards.indices {
@@ -61,13 +62,10 @@ class ViewController: UIViewController {
             cardView.addGestureRecognizer(tap)
         }
         
-        
-        
         let cardViewsToDealOut = cardsGrid.cardViewsInPlay.filter { $0.alpha == 0 }
         
         if !cardViewsToDealOut.isEmpty {
             var index = 0
-
             Timer.scheduledTimer(
                 withTimeInterval: 0.2,
                 repeats: true,
@@ -78,9 +76,13 @@ class ViewController: UIViewController {
                     cardView.alpha = 1
                     UIViewPropertyAnimator.runningPropertyAnimator(
                         withDuration: 0.6,
-                        delay: 0.3,
+                        delay: 0,
                         options: [.curveEaseInOut],
-                        animations: {cardView.frame = originalFrame},
+                        animations: {cardView.frame = originalFrame
+                            if self.game.shuffledDeck.isEmpty {
+                                self.dealButton.backgroundColor = UIColor.clear
+                            }
+                        },
                         completion: { finished in
                             UIView.transition(
                                 with: cardView,
@@ -97,25 +99,36 @@ class ViewController: UIViewController {
             })
         }
         
-        if !game.matchedCards.isEmpty {
-            for card in game.matchedCards {
-                if let index = game.loadedCards.index(of: card) {
-                    let cardView = cardsGrid.cardViewsInPlay[index]
-                    if cardView.alpha == 1 {
-                        UIViewPropertyAnimator.runningPropertyAnimator(
-                            withDuration: 0.4,
-                            delay: 0,
-                            options: [],
-                            animations: {cardView.alpha = 0},
-                            completion: nil)
-                    }
-                }
-            }
-        }
-        
-        dealButton.backgroundColor = !game.shuffledDeck.isEmpty ? #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1) : UIColor.clear
-        setTitle.textColor = !game.matchedCards.isEmpty ? #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1) : UIColor.white
         scoreLabel.text = "SCORE: \(game.score)"
+        
+        let matchedCardViews = cardsGrid.cardViewsInPlay.filter { $0.isMatched }
+        
+        if  !matchedCardViews.isEmpty {
+            for cardView in matchedCardViews {
+                
+                let tempCardView = cardsGrid.duplicateCardView(of: cardView)
+                UIViewPropertyAnimator.runningPropertyAnimator(
+                    withDuration: 0.6,
+                    delay: 0,
+                    options: [.curveEaseInOut],
+                    animations: { tempCardView.frame = self.cardsGrid.setFrame },
+                    completion: { finished in
+                        UIView.transition(
+                            with: tempCardView,
+                            duration: 0.6,
+                            options: [.transitionFlipFromRight],
+                            animations: { tempCardView.isFaceUp = false },
+                            completion: { position in
+                                tempCardView.removeFromSuperview()
+                                self.setLabel.backgroundColor = #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)
+                        })
+                })
+                cardView.alpha = 0
+                cardView.isFaceUp = false
+            }
+            game.deal3NewCards()
+            updateViewFromModel()
+        }
         
     }
     

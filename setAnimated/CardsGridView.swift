@@ -18,6 +18,7 @@ class CardsGridView: UIView {
     var deckExhausted = false
     
     var deckFrame = CGRect()
+    var setFrame = CGRect()
     
     func addCardViews(number: Int) {
         var newCardViews = [CardView]()
@@ -30,15 +31,25 @@ class CardsGridView: UIView {
         cardViewsInPlay += newCardViews
     }
     
-    func removeCardViews(number: Int) {
-        for _ in 1...number {
-            subviews.last?.removeFromSuperview()
+    func removeMatchedCardViews() {
+        let matchedCardViews = cardViewsInPlay.filter { $0.isMatched }
+        for cardView in matchedCardViews {
+            cardView.removeFromSuperview()
+            cardViewsInPlay.remove(at: cardViewsInPlay.index(of: cardView)!)
         }
-        cardViewsInPlay.removeLast(number)
     }
     
-//    override func draw(_ rect: CGRect) {
-//    }
+    func duplicateCardView(of cardView: CardView) -> CardView {
+        let newCardView = CardView()
+        newCardView.shape = cardView.shape
+        newCardView.number = cardView.number
+        newCardView.color = cardView.color
+        newCardView.shade = cardView.shade
+        newCardView.isFaceUp = cardView.isFaceUp
+        newCardView.frame = cardView.frame
+        addSubview(newCardView)
+        return newCardView
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -46,6 +57,7 @@ class CardsGridView: UIView {
         grid.cellCount = cardViewsInPlay.count
         configureCardSubViews()
         deckFrame = CGRect(x: bounds.minX, y: bounds.maxY + 10, width: 50, height: 80)
+        setFrame = CGRect(x: bounds.maxX - 50, y: bounds.maxY + 10, width: 50, height: 80)
     }
     
     func configureCardSubViews() {
@@ -67,7 +79,6 @@ class CardsGridView: UIView {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        configureCardSubViews()
         setNeedsLayout()
     }
 }

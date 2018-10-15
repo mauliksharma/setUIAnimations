@@ -50,6 +50,7 @@ class CardView: UIView {
         super.layoutSubviews()
         if !isFaceUp {
             backgroundColor = #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)
+            removeAllSubViews()
         }
         else {
             backgroundColor = UIColor.white

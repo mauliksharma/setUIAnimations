@@ -46,6 +46,8 @@ class Game {
     var selectedCards = [Card]()
     var matchedCards = [Card]()
     
+    var foundAtLeastOne = false
+    
     var symbolSet = Set<Int>()
     var numberSet = Set<Int>()
     var colorSet = Set<Int>()
@@ -102,6 +104,7 @@ class Game {
                             matchedCards.append(card)
                         }
                         score += 3
+                        foundAtLeastOne = true
                     }
                     else {
                         score -= 5
